@@ -17,5 +17,9 @@ class FoiCollectorPipeline(object):
         return item
 
     def close_spider(self, spider):
+        self.writer.set_source(
+            source_title=spider.source_title,
+            source_link=spider.source_link,
+        )
         self.writer.write('/tmp/out.json')
 
