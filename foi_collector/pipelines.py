@@ -9,8 +9,13 @@ from foi_collector.writer import FOISourceWriter
 
 class FoiCollectorPipeline(object):
 
-    def __init__(self):
+    def __init__(self, crawler):
         self.writer = FOISourceWriter()
+        self.writer_output_file = crawler.settings['OUTPUT_FILE']
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler)
 
     def process_item(self, item, spider):
         self.writer.add_data(item)
@@ -21,5 +26,5 @@ class FoiCollectorPipeline(object):
             source_title=spider.source_title,
             source_link=spider.source_link,
         )
-        self.writer.write('/tmp/out.json')
+        self.writer.write(self.writer_output_file)
 
