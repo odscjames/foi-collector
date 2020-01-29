@@ -10,6 +10,12 @@ class IcoSpider(scrapy.Spider):
     start_urls = ['https://icosearch.ico.org.uk/s/search.html?collection=ico-meta&profile=disclosurelog&&query=']
 
     def parse(self, response):
+        if response.css('a.button-next'):
+            url = 'https://icosearch.ico.org.uk/s/' + response.css('a.button-next::attr(href)').extract()[0]
+            yield scrapy.Request(
+                url=url,
+            )
+
         for item in response.css('.resultlist .itemlink-content'):
             link = item.css('a::attr(title)').get()
             yield scrapy.Request(
