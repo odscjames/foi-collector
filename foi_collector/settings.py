@@ -85,11 +85,16 @@ ITEM_PIPELINES = {
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
+
+# DEBUG/DEVELOPMENT SETTINGS
+# Force Cache Everything, For Ever, Never Expire.
 #HTTPCACHE_ENABLED = True
 #HTTPCACHE_EXPIRATION_SECS = 0
+#HTTPCACHE_POLICY = 'scrapy.extensions.httpcache.DummyPolicy'
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#HTTPCACHE_ALWAYS_STORE = True
 
 
 OUTPUT_FILE = os.environ.get('OUTPUT_FILE', '/tmp/output.json')
